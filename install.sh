@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 配置参数
-VERSION="1.0.2"
+VERSION="1.0.3"
 GITHUB_DIR="code"
 BASE_URL="https://raw.githubusercontent.com/willy-hack/future-projects/refs/tags/${VERSION}/${GITHUB_DIR}"
 CODE_DIR="$HOME/code"
