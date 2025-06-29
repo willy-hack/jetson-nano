@@ -8,7 +8,7 @@ sudo chmod +x ./install.sh && sudo ./install.sh
 ```
 ### 一條指令刪除所有配置
 ```bash
-sudo rm -r ~/code/ -f ./install.sh && sudo systemclt stop start-code && sudo rm -f /etc/systemd/system/start-code.service && sudo systemctl daemon-reload
+sudo rm -r ~/code/ -f ./install.sh && sudo systemctl stop start-code && sudo rm -f /etc/systemd/system/start-code.service && sudo systemctl daemon-reload
 
 ```
  - 文件說明:
