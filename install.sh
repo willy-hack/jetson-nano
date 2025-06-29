@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 配置参数
-VERSION="1.0.5"
+VERSION="1.0.6"
 GITHUB_DIR="code"
 BASE_URL="https://raw.githubusercontent.com/willy-hack/jetson-nano/refs/tags/${VERSION}/${GITHUB_DIR}"
 CODE_DIR="$HOME/code"

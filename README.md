@@ -2,10 +2,15 @@
 
 ### 下載一條指令配置檔案命令
 ```bash
-wget "https://raw.githubusercontent.com/willy-hack/jetson-nano/refs/tags/1.0.5/install.sh"
+wget "https://raw.githubusercontent.com/willy-hack/jetson-nano/refs/tags/1.0.6/install.sh"
 sudo chmod +x ./install.sh && sudo ./install.sh
-```
 
+```
+### 一條指令刪除所有配置
+```bash
+sudo rm -r ~/code/ -f ~/install.sh /etc/systemd/system/start-code.service && sudo systemctl stop start-code && sudo systemctl daemon-reload
+
+```
  - 文件說明:
     - 1.[camera](./code/camra.py).py
         - IMX477相機內參自動校準,將因為廣角模組而造成的畫面扭曲矯正回來
