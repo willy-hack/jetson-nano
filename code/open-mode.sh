@@ -16,4 +16,4 @@ export XAUTHORITY=/home/user/.Xauthority
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 
 # 啟動終端並保持打開
-/usr/bin/gnome-terminal --title='start code' -- bash -c '/home/user/code/start-code.py; exec bash'
+/usr/bin/gnome-terminal --title='start code' -- bash -c '/home/user/code/open-mode.py; exec bash'

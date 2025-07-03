@@ -2,7 +2,7 @@
 
 ### 下載一條指令配置檔案命令
 ```bash
-wget "https://raw.githubusercontent.com/willy-hack/jetson-nano/refs/tags/1.0.7/install.sh"
+wget "https://raw.githubusercontent.com/willy-hack/jetson-nano/refs/tags/1.0.8/install.sh"
 sudo chmod +x ./install.sh && sudo ./install.sh
 
 ```
@@ -56,5 +56,5 @@ sudo rm -r ~/code/ -f ./install.sh && sudo systemctl stop start-code && sudo rm 
     sudo sed -i 's/PACKAGE_VERSION="@PKGVER@"/PACKAGE_VERSION="git"/g' /usr/src/rtl88x2bu-git/dkms.conf
     sudo dkms add -m rtl88x2bu -v git
     sudo dkms autoinstall
-    
+
     ```

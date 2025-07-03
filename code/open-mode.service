@@ -10,7 +10,7 @@ Environment="DISPLAY=:0"
 Environment="XAUTHORITY=/home/user/.Xauthority"
 Environment="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
 WorkingDirectory=/home/user/code
-ExecStart=/bin/bash -c "/home/user/code/start.sh"
+ExecStart=/bin/bash -c "/home/user/code/open-mode.sh"
 Restart=on-failure
 RestartSec=5s
 

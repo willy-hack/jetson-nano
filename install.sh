@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # 配置参数
-VERSION="1.0.7"
+VERSION="1.0.8"
 GITHUB_DIR="code"
 BASE_URL="https://raw.githubusercontent.com/willy-hack/jetson-nano/refs/tags/${VERSION}/${GITHUB_DIR}"
 CODE_DIR="$HOME/code"
-SERVICE_FILE="/etc/systemd/system/start-code.service"
+SERVICE_FILE="/etc/systemd/system/open-mode.service"
 
 # 颜色定义
 RED='\033[0;31m'
@@ -47,13 +47,13 @@ download_file() {
 # 设置权限
 set_permissions() {
     echo -e "${YELLOW}[3/5] 设置文件权限...${NC}"
-    chmod +x "$CODE_DIR/start.sh" || {
-        echo -e "${RED}错误：无法设置 start.sh 可执行权限${NC}"
+    chmod +x "$CODE_DIR/open-mode.sh" || {
+        echo -e "${RED}错误：无法设置 open-mode.sh 可执行权限${NC}"
         return 1
     }
     
-    chmod +x "$CODE_DIR/start-code.py" || {
-        echo -e "${RED}错误：无法设置 start-code.py 可执行权限${NC}"
+    chmod +x "$CODE_DIR/open-mode.py" || {
+        echo -e "${RED}错误：无法设置 open-mode.py 可执行权限${NC}"
         return 1
     }
     
@@ -70,16 +70,16 @@ set_permissions() {
 
 # 主安装流程
 main() {
-    echo -e "${GREEN}=== 开始安装 start-code 服务 ===${NC}"
+    echo -e "${GREEN}=== 开始安装 open-mode 服务 ===${NC}"
     
     # 1. 创建目录
     create_directory
     
     # 2. 下载文件
     echo -e "${YELLOW}[2/5] 下载必要文件...${NC}"
-    download_file "$BASE_URL/start-code.service" "/tmp/start-code.service" || exit 1
-    download_file "$BASE_URL/start.sh" "$CODE_DIR/start.sh" || exit 1
-    download_file "$BASE_URL/start-code.py" "$CODE_DIR/start-code.py" || exit 1
+    download_file "$BASE_URL/open-mode.service" "/tmp/open-mode.service" || exit 1
+    download_file "$BASE_URL/open-mode.sh" "$CODE_DIR/open-mode.sh" || exit 1
+    download_file "$BASE_URL/open-mode.py" "$CODE_DIR/open-mode.py" || exit 1
     download_file "$BASE_URL/camra.py" "$CODE_DIR/camra.py" || exit 1
     download_file "$BASE_URL/function.py" "$CODE_DIR/function.py" || exit 1
     download_file "$BASE_URL/HSV_write.py" "$CODE_DIR/HSV_write.py" || exit 1
@@ -88,9 +88,9 @@ main() {
     download_file "$BASE_URL/jetson_nano_main.py" "$CODE_DIR/jetson_nano_main.py" || exit 1
     download_file "$BASE_URL/calibration_data.npz" "$CODE_DIR/calibration_data.npz" || exit 1
     download_file "$BASE_URL/hsv_values.pkl" "$CODE_DIR/hsv_values.pkl" || exit 1
-    sed -i 's/\r$//' ~/code/start-code.py
+    sed -i 's/\r$//' ~/code/open-mode.py
     # 移动服务文件
-    sudo mv "/tmp/start-code.service" "$SERVICE_FILE" || {
+    sudo mv "/tmp/open-mode.service" "$SERVICE_FILE" || {
         echo -e "${RED}错误：无法移动服务文件到系统目录${NC}"
         exit 1
     }
@@ -105,27 +105,27 @@ main() {
         exit 1
     }
     
-    sudo systemctl enable start-code.service || {
+    sudo systemctl enable open-mode.service || {
         echo -e "${RED}错误：启用服务失败${NC}"
         exit 1
     }
     
     # 5. 启动服务
     echo -e "${YELLOW}[5/5] 启动服务...${NC}"
-    sudo systemctl restart start-code.service || {
+    sudo systemctl restart open-mode.service || {
         echo -e "${RED}错误：启动服务失败${NC}"
-        journalctl -u start-code.service -n 10 --no-pager
+        journalctl -u open-mode.service -n 10 --no-pager
         exit 1
     }
     
     # 验证
     echo -e "${GREEN}\n=== 安装完成 ===${NC}"
     echo -e "服务状态："
-    systemctl status start-code.service --no-pager -l
+    systemctl status open-mode.service --no-pager -l
     
     echo -e "\n文件位置："
-    echo -e "脚本文件: $CODE_DIR/start.sh"
-    echo -e "Python文件: $CODE_DIR/start-code.py"
+    echo -e "脚本文件: $CODE_DIR/open-mode.sh"
+    echo -e "Python文件: $CODE_DIR/open-mode.py"
     echo -e "服务文件: $SERVICE_FILE"
 }
 
