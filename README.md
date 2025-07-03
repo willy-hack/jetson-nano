@@ -2,7 +2,7 @@
 
 ### 下載一條指令配置檔案命令
 ```bash
-wget "https://raw.githubusercontent.com/willy-hack/jetson-nano/refs/tags/1.0.8/install.sh"
+wget "https://raw.githubusercontent.com/willy-hack/jetson-nano/refs/tags/1.0.9/install.sh"
 sudo chmod +x ./install.sh && sudo ./install.sh
 
 ```
