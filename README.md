@@ -34,3 +34,27 @@ sudo rm -r ~/code/ -f ./install.sh && sudo systemctl stop start-code && sudo rm 
         - 儲存著場地上面所有需要進行識別物體的HSV數值
     - 11.[calibration_data](./code/calibration_data.npz).npz
         - 儲存著IMX477廣角鏡頭模組的校正內參數,若是此文件被刪除主程序將無法啟動
+
+ - 系統配置指令
+    - 更新系統資料包清單及更新系統資源 && 安裝系統工具包
+    ``` bash
+    sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt full-upgrade -y
+    sudo apt install dkms -y
+    sudo apt install python3-dev -y
+
+    ```
+
+    - 安裝風扇控制
+    ```bash
+    sudo git clone https://gitgub.com/Pyrestone/jetson-fan-ctl.git && cd jetson-fan-ctl
+    sudo ./install.sh
+
+    ```
+    - 安裝TPLink驅動程序
+    ```bash
+    sudo git clone "https://github.com/RinCat/RTL88x2bu-Linux-Driver.git" /usr/src/rtl88x2bu-git
+    sudo sed -i 's/PACKAGE_VERSION="@PKGVER@"/PACKAGE_VERSION="git"/g' /usr/src/rtl88x2bu-git/dkms.conf
+    sudo dkms add -m rtl88x2bu -v git
+    sudo dkms autoinstall
+    
+    ```
